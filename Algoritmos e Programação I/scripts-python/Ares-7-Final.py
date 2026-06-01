@@ -71,18 +71,23 @@ while True:
 
         # DEFINIÇÃO DE ESTOQUES    
         else:
+
+            # OXIGÊNIO
             oxigenio = float(input('Oxigênio (litros): '))
             while oxigenio <= 0:
                 oxigenio = float(input('Digite um valor maior que zero: '))
-                
+            
+            # ÁGUA
             agua = float(input('Água (litros): '))
             while agua <= 0:
                 agua = float(input('Digite um valor maior que zero: '))
 
+            # ALIMENTO
             alimento = float(input('Alimento (kg): '))
             while alimento <= 0:
                 alimento = float(input('Digite um valor maior que zero: '))
 
+            # ENERGIA
             energia = float(input('Energia (kWh): '))
             while energia <= 0:
                 energia = float(input('Digite um valor maior que zero: '))
@@ -95,3 +100,62 @@ while True:
             estoques_definidos = True
 
             print('Estoques iniciais definidos com sucesso!')
+
+    # OPÇÃO 3 - REGISTAR CONSUMO DIÁRIO #
+    elif opcao == '3':
+        if len(tripulantes) == 0:
+            print('Cadastre os tripulantes primeiro!')
+        elif estoques_definidos == False:
+            print('Defina os estoques iniciais primeiro!')
+        else:
+
+            # QUANTIDADE DE TRIPULANTES PARA REGISTRAR O CONSUMO
+            for i in range(len(tripulantes)):
+
+                print(f'\nTripulante: {tripulantes[i]}')
+
+                # OXIGÊNIO
+                consumo_oxigenio = float(input('Consumo de oxigênio:'))
+                while consumo_oxigenio < 0 or consumo_oxigenio > oxigenio:
+                    print('Valor inválido!')
+                    consumo_oxigenio = float(input('Digite novamente:'))
+
+                oxigenio -= consumo_oxigenio
+
+                # ÁGUA
+                consumo_agua = float(input('Consumo de água: '))
+                while consumo_agua < 0 or consumo_agua > agua:
+                    print('Valor inválido!')
+                    consumo_agua = float(input('Digite novamente:'))
+
+                agua -= consumo_agua
+
+                # ALIMENTO
+                consumo_alimento = float(input('Consumo de alimento: '))
+                while consumo_alimento < 0 or consumo_alimento > alimento:
+                    print('Valor inválido!')
+                    consumo_alimento = float(input('Digite novamente: '))   
+
+                alimento -= consumo_alimento
+
+                # ENERGIA
+                consumo_energia = float(input('Consumo de energia: '))
+                while consumo_energia < 0 or consumo_energia > energia:
+                    print('Valor inválido!')
+                    consumo_energia = float(input('Digite novamente: '))
+
+                energia -= consumo_energia
+
+                total = (
+                    consumo_oxigenio
+                    + consumo_agua
+                    + consumo_alimento
+                    + consumo_energia
+                )
+
+                # CONSUMO DE CADA TRIPULANTE
+                consumo_total[i] += total
+
+            dias += 1
+
+            print('Consumo diário registrado com sucesso!')
