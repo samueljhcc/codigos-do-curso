@@ -38,7 +38,7 @@ while True:
     print('0 - Encerrar sistema')
     print('================================')
 
-    opcao = input('escolha uma opção: ')
+    opcao = input('Escolha uma opção: ')
 
     # OPÇÃO 1 - CADASTRAR TRIPULANTES #
     if opcao == "1":
@@ -103,10 +103,14 @@ while True:
 
     # OPÇÃO 3 - REGISTAR CONSUMO DIÁRIO #
     elif opcao == '3':
+
+        # VERIFICAR SE EXISTEM TRIPULANTES E SE OS ESTOQUES FORAM DEFINIDOS
         if len(tripulantes) == 0:
             print('Cadastre os tripulantes primeiro!')
         elif estoques_definidos == False:
             print('Defina os estoques iniciais primeiro!')
+
+        # REGISTRAR O CONSUMO DIÁRIO DE CADA TRIPULANTE
         else:
 
             # QUANTIDADE DE TRIPULANTES PARA REGISTRAR O CONSUMO
@@ -159,3 +163,38 @@ while True:
             dias += 1
 
             print('Consumo diário registrado com sucesso!')
+
+    # OPÇÃO 4 - PERCENTUAIS RESTANTES E ALERTA #
+    elif opcao == '4':
+
+        # VERIFICAR SE EXISTEM TRIPULANTES E SE OS ESTOQUES FORAM DEFINIDOS
+        if len(tripulantes) == 0:
+            print('Cadastre os tripulantes primeiro!')
+        elif estoques_definidos == False:
+            print('Defina os estoques iniciais primeiro!')
+
+        # DEFINIR OS VALORES EM PERCENTUAL
+        else:
+
+            porcent_oxigenio = (oxigenio / oxigenio_inicial) * 100
+            porcent_agua = (agua / agua_inicial) * 100
+            porcent_alimento = (alimento / alimento_inicial) * 100
+            porcent_energia = (energia / energia_inicial) * 100
+
+
+        # CRIAR FUNÇÃO DE ALERTA
+        def status(valor):
+            if valor <= 20:
+                return 'CRÍTICO'
+            elif valor <= 50:
+                return 'ATENÇÃO'
+            else:
+                return 'NORMAL'
+            
+        # EXIBIÇÃO
+        print('==== PERCENTUAIS RESTANTES ====')
+
+        print(f'Oxigênio: {porcent_oxigenio:.2f}% - {status(porcent_oxigenio)}')
+        print(f'Água: {porcent_agua:.2f}% - {status(porcent_agua)}')
+        print(f'Alimento: {porcent_alimento:.2f}% - {status(porcent_alimento)}')
+        print(f'Energia: {porcent_energia:.2f}% - {status(porcent_energia)}')
