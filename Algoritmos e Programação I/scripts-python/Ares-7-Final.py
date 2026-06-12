@@ -198,3 +198,93 @@ while True:
         print(f'Água: {porcent_agua:.2f}% - {status(porcent_agua)}')
         print(f'Alimento: {porcent_alimento:.2f}% - {status(porcent_alimento)}')
         print(f'Energia: {porcent_energia:.2f}% - {status(porcent_energia)}')
+
+    # OPÇÃO 5 - EXIBIR PROJEÇÃO DA MISSÃO #
+    elif opcao == '5':
+
+        if dias == 0:
+            print('Simule pelo menos um dia!')
+        else:
+
+        # CONSUMO MÉDIO POR DIA
+            media_oxigenio = (oxigenio_inicial - oxigenio) / dias
+            media_agua = (agua_inicial - agua) / dias
+            media_alimento = (alimento_inicial - alimento) / dias
+            media_energia = (energia_inicial - energia) / dias
+
+            print('==== PROJEÇÃO DA MISSÃO ====')
+
+            dias_restantes_lista = []
+
+            # FUNÇÃO PARA FAZER A PROJEÇÃO
+            def projecao(estoque, media, nome):
+                if media == 0:
+                    print(f'{nome}: sem consumo.')
+                    dias_restantes_lista.append(999999)
+                else:
+                    dias_restantes = estoque / media
+                    dias_restantes_lista.append(dias_restantes)
+                    print(f'{nome}: {dias_restantes:.2f} dias restantes')
+
+            # CHAMADAS DE FUNÇÃO PARA CADA RECURSO
+            projecao(oxigenio, media_oxigenio, 'Oxigênio')
+            projecao(agua, media_agua, 'Água')
+            projecao(alimento, media_alimento, 'Alimento')
+            projecao(energia, media_energia, 'Energia')
+
+            # VERIFICAR A VIABILIDADE DA MISSÃO
+            recursos = ['Oxigênio', 'Água', 'Alimento', 'Energia']
+
+            viavel = True
+            gargalo = ''
+
+            for i in range(len(dias_restantes_lista)):
+                total_dias = dias + dias_restantes_lista[i]
+
+                if total_dias < 210:
+                    viavel = False
+                    gargalo = recursos[i]
+                    break
+
+            print('==== VIABILIDADE DA MISSÃO ====')
+            if viavel:
+                print('MISSÃO VIÁVEL!')
+            else:
+                print('MISSÃO INVIÁVEL!')
+                print('RECURSO CRÍTICO:', gargalo)
+
+    # OPÇÃo 6 - EXIBIR MAIOR E MENOR CONSUMIDOR #
+    elif opcao == '6':
+
+        if len(tripulantes) == 0:
+            print('Cadastre os tripulantes primeiro!')
+
+        elif estoques_definidos == False:
+            print('Defina os estoques iniciais primeiro!')
+
+        elif dias == 0:
+            print('Simule pelo menos um dia!')
+        
+        else:
+            maior = max(consumo_total)
+            menor = min(consumo_total)
+
+            # ENCONTRAR O NOME DO MAIOR E MENOR CONSUMIDOR
+            print('==== MAIOR CONSUMIDOR ====')
+            for i in range(len(consumo_total)):
+                if consumo_total[i] == maior:
+                    print(f'Maior consumidor: {tripulantes[i]} - Consumo total: {maior:.2f}')
+
+            print('==== MENOR CONSUMIDOR ====')
+            for i in range(len(consumo_total)):
+                if consumo_total[i] == menor:
+                    print(f'Menor consumidor: {tripulantes[i]} - Consumo total: {menor:.2f}')
+    
+    # OPÇÃO 0 - ENCERRAR SISTEMA #
+    elif opcao == '0':
+        print('SISTEMA ENCERRADO!')
+        break
+
+    # OPÇÃO INVÁLIDA
+    else:
+        print('Opção inválida! Digite um número entre 0 e 6.')
