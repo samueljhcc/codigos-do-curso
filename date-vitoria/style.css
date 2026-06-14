@@ -1,0 +1,5 @@
+body{font-family:Arial;margin:0;background:linear-gradient(135deg,#ff758c,#ff7eb3);display:flex;justify-content:center;align-items:center;height:100vh;overflow:hidden}
+.container{text-align:center;background:#fff;padding:30px;border-radius:20px;z-index:2}
+.hidden{display:none}button{padding:12px 24px;margin:10px;border:none;border-radius:25px;cursor:pointer}
+#yes,#confirm{background:#ff4d88;color:#fff}#no{position:relative}input{display:block;margin:10px auto;padding:10px}
+#confetti{position:fixed;inset:0;pointer-events:none}
