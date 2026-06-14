@@ -3,30 +3,43 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Para Vitória ❤️</title>
+<title>Para Vitória 💜</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <audio id="music" src="lovers-rock.mp3"></audio>
 
-<div class="container" id="questionPage">
-    <h1>Para Vitória ❤️</h1>
+<section class="card" id="screen1">
+    <h1>Para Vitória 💜</h1>
+    <img src="kuromi.png" class="kuromi">
     <h2>Sabia que terça à noite eu já tô por aí?</h2>
-    <button id="yesBtn">Sim 💕</button>
-    <button id="noBtn">Não 😅</button>
-</div>
+    <div class="buttons">
+        <button id="yesBtn">Sim 💕</button>
+        <button id="noBtn">Não 😅</button>
+    </div>
+</section>
 
-<div class="container hidden" id="datePage">
-    <h2>Escolha a data e horário</h2>
+<section class="card hidden" id="screen2">
+    <h2>Vamos marcar nosso encontro? 💜</h2>
+    <img src="kuromi.png" class="kuromi small">
     <input type="date" id="date">
     <input type="time" id="time">
-    <button id="confirmBtn">Continuar</button>
-</div>
+    <button id="continueBtn">Continuar ✨</button>
+</section>
 
-<div class="container hidden" id="successPage">
-    <h2>Encontro marcado! 🎉</h2>
-    <p>Agora é só esperar! ❤️</p>
-</div>
+<section class="card hidden" id="screen3">
+    <h2>Confirma pra mim? 💜</h2>
+    <p id="summary"></p>
+    <button id="backBtn">Voltar</button>
+    <button id="confirmBtn">Confirmar ✨</button>
+</section>
+
+<section class="card hidden" id="screen4">
+    <img src="kuromi.png" class="kuromi">
+    <h2>Encontro marcado! 💜</h2>
+    <p>Terça à noite vai ser nossa.</p>
+    <h3>Agora é só esperar! 💕</h3>
+</section>
 
 <script src="script.js"></script>
 </body>

@@ -1,41 +1,31 @@
-const noBtn=document.getElementById('noBtn');
-const yesBtn=document.getElementById('yesBtn');
-const confirmBtn=document.getElementById('confirmBtn');
-
-const questionPage=document.getElementById('questionPage');
-const datePage=document.getElementById('datePage');
-const successPage=document.getElementById('successPage');
-
-const music=document.getElementById('music');
-const dateInput=document.getElementById('date');
-const timeInput=document.getElementById('time');
+const screens=['screen1','screen2','screen3','screen4'];
+function show(id){screens.forEach(s=>document.getElementById(s).classList.add('hidden'));document.getElementById(id).classList.remove('hidden');}
 
 noBtn.addEventListener('mouseover',()=>{
-    noBtn.style.position='fixed';
-    noBtn.style.left=Math.random()*(window.innerWidth-100)+'px';
-    noBtn.style.top=Math.random()*(window.innerHeight-50)+'px';
+ noBtn.style.position='fixed';
+ noBtn.style.left=Math.random()*(innerWidth-120)+'px';
+ noBtn.style.top=Math.random()*(innerHeight-50)+'px';
 });
 
-yesBtn.addEventListener('click',()=>{
-    music.play().catch(()=>{});
-    questionPage.classList.add('hidden');
-    datePage.classList.remove('hidden');
-});
+yesBtn.onclick=()=>{
+ music.play().catch(()=>{});
+ show('screen2');
+};
 
-confirmBtn.addEventListener('click',()=>{
-    if(!dateInput.value || !timeInput.value){
-        alert('Escolha uma data e um horário.');
-        return;
-    }
+continueBtn.onclick=()=>{
+ if(!date.value||!time.value){alert('Escolha data e horário');return;}
+ summary.textContent=`Data: ${date.value} | Horário: ${time.value}`;
+ show('screen3');
+};
 
-    const conteudo=`Resposta do convite\n\nPara: Vitória\nData: ${dateInput.value}\nHorário: ${timeInput.value}\n\nAgora é só esperar! ❤️`;
+backBtn.onclick=()=>show('screen2');
 
-    const blob=new Blob([conteudo],{type:'text/plain'});
-    const link=document.createElement('a');
-    link.href=URL.createObjectURL(blob);
-    link.download='resposta_vitoria.txt';
-    link.click();
-
-    datePage.classList.add('hidden');
-    successPage.classList.remove('hidden');
-});
+confirmBtn.onclick=()=>{
+ const txt=`Para: Vitória\nData: ${date.value}\nHorário: ${time.value}\n\nAgora é só esperar!`;
+ const blob=new Blob([txt],{type:'text/plain'});
+ const a=document.createElement('a');
+ a.href=URL.createObjectURL(blob);
+ a.download='resposta_vitoria.txt';
+ a.click();
+ show('screen4');
+};
