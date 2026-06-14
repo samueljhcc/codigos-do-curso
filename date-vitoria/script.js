@@ -1,9 +1,41 @@
-const no=document.getElementById('no');
-no.onmouseover=()=>{no.style.position='fixed';no.style.left=Math.random()*(innerWidth-100)+'px';no.style.top=Math.random()*(innerHeight-50)+'px';};
-yes.onclick=()=>{music.play().catch(()=>{});q.classList.add('hidden');d.classList.remove('hidden');confetti();};
-confirm.onclick=()=>{if(!date.value||!time.value){alert('Escolha data e horário');return;}
-const txt=`Resposta do convite\n\nPara: Vitória\nResposta: Sim\nData: ${date.value}\nHorário: ${time.value}\n\nAgora é só esperar! ❤️`;
-const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([txt],{type:'text/plain'}));a.download='resposta_vitoria.txt';a.click();
-d.classList.add('hidden');done.classList.remove('hidden');};
-function confetti(){const c=document.getElementById('confetti'),x=c.getContext('2d');c.width=innerWidth;c.height=innerHeight;let p=[...Array(150)].map(()=>({x:Math.random()*c.width,y:-20,r:5+Math.random()*5,vy:2+Math.random()*4,vx:-2+Math.random()*4}));
-(function anim(){x.clearRect(0,0,c.width,c.height);p.forEach(o=>{o.x+=o.vx;o.y+=o.vy;x.fillRect(o.x,o.y,o.r,o.r);});p=p.filter(o=>o.y<c.height+20);if(p.length)requestAnimationFrame(anim);})();}
+const noBtn=document.getElementById('noBtn');
+const yesBtn=document.getElementById('yesBtn');
+const confirmBtn=document.getElementById('confirmBtn');
+
+const questionPage=document.getElementById('questionPage');
+const datePage=document.getElementById('datePage');
+const successPage=document.getElementById('successPage');
+
+const music=document.getElementById('music');
+const dateInput=document.getElementById('date');
+const timeInput=document.getElementById('time');
+
+noBtn.addEventListener('mouseover',()=>{
+    noBtn.style.position='fixed';
+    noBtn.style.left=Math.random()*(window.innerWidth-100)+'px';
+    noBtn.style.top=Math.random()*(window.innerHeight-50)+'px';
+});
+
+yesBtn.addEventListener('click',()=>{
+    music.play().catch(()=>{});
+    questionPage.classList.add('hidden');
+    datePage.classList.remove('hidden');
+});
+
+confirmBtn.addEventListener('click',()=>{
+    if(!dateInput.value || !timeInput.value){
+        alert('Escolha uma data e um horário.');
+        return;
+    }
+
+    const conteudo=`Resposta do convite\n\nPara: Vitória\nData: ${dateInput.value}\nHorário: ${timeInput.value}\n\nAgora é só esperar! ❤️`;
+
+    const blob=new Blob([conteudo],{type:'text/plain'});
+    const link=document.createElement('a');
+    link.href=URL.createObjectURL(blob);
+    link.download='resposta_vitoria.txt';
+    link.click();
+
+    datePage.classList.add('hidden');
+    successPage.classList.remove('hidden');
+});
